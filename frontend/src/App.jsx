@@ -1,16 +1,36 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-// import styles from "./index.css"
+import axios from './api/axios'
+
 import './index.css'
+import Navbar from './pages/Navbar'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import PostList from './pages/PostList'
+import { BlogCard } from './components/BlogCard'
+import { Post } from './pages/Post'
+
 
 function App() {
 
+  const [user, setUser] = useState();
+  const getUser = async () => {
+    try {
+      const url = '/auth/google'
+      const response = await fetch(url)
+      const data = await response.json()
+      setUser(data)
+    } catch (error) {
 
+    }
+  }
+  // setUser(user);
   return (
-    <div className='text-3xl bg-red-500'>
-
-    </div>
+    < BrowserRouter >
+      <Navbar user={user} setUser={setUser} />
+      <Routes>
+        <Route path='/posts' element={<PostList user={user} setUser={setUser} />} />
+        <Route path='/post/:id' element={<Post />} />
+      </Routes >
+    </BrowserRouter >
   )
 }
 

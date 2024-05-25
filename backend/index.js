@@ -1,6 +1,7 @@
 const express = require('express')
 const connectDB = require('./config/db')
 const app = express()
+const cors = require('cors')
 const session = require('express-session');
 const bodyParser = require('body-parser')
 const postRoutes = require('./routes/posts')
@@ -11,7 +12,11 @@ const path = require('path')
 // const commentRoutes = require('./routes/comments')
 const passport = require('passport')
 require('./auth/index')
-
+app.use(cors({
+    origin: ["http://localhost:3000", " https://accounts.google.com"],
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+}));
 const port = 3000
 app.use(session({
     secret: 'keyboard cat',
@@ -19,6 +24,12 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false }
 }))
+app.use((req, res, next) => {
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+    next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use(express.cookieParser());
 app.use(bodyParser.json())
