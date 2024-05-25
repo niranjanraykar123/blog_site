@@ -20,7 +20,7 @@ router.post('/:postId', ensureAuthenticated, async (req, res) => {
         const comment = await newComment.save();
 
         // Add comment to the post's comments array
-        post.comments.push(comment.id);
+        post.comments.push(comment);
         await post.save();
 
         res.json(comment);

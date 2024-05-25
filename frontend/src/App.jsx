@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import PostList from './pages/PostList'
 import { BlogCard } from './components/BlogCard'
 import { Post } from './pages/Post'
+import { Publish } from './pages/Publish'
 
 
 function App() {
@@ -29,7 +30,8 @@ function App() {
       <Routes>
         <Route path='/posts' element={<PostList user={user} setUser={setUser} />} />
         <Route path='/post/:id' element={<Post />} />
-      </Routes >
+        <Route path="/publish" element={<Publish user={user} />} />
+      </Routes>
     </BrowserRouter >
   )
 }

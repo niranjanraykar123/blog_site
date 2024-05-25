@@ -7,7 +7,17 @@ import { BlogCard } from '../components/BlogCard';
 const PostList = ({ user, setUser }) => {
     const [posts, setPosts] = useState([]);
 
+    setTimeout(() => {
+        // location.reload();
+
+    });
     useEffect(() => {
+        const reloadOnce = localStorage.getItem('reloadOnce');
+        if (!reloadOnce) {
+            localStorage.setItem('reloadOnce', 'true');
+            location.reload();
+        }
+
         const getUser = async () => {
             const user = await axios.get('/auth/current_user');
             // console.log(user.data.err)

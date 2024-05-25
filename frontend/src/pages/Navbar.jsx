@@ -8,6 +8,7 @@ const Navbar = ({ user, setUser }) => {
     // const [user, setUser] = useState(null);
 
     const googleAuth = () => {
+        localStorage.removeItem('reloadOnce')
         window.open(
             `http://localhost:3000/auth/google`,
             "_self"

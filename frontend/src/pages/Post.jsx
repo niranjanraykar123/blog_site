@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { FullBlogs } from "../components/FullBlog";
+import Comments from "../components/Comments";
 
 export const Post = () => {
     const { id } = useParams();
@@ -13,11 +14,14 @@ export const Post = () => {
         setBlog(blog.data)
     }
 
+
+
     useEffect(() => {
         getBlog();
     }, [])
     return <div>
         <FullBlogs blog={blog} />
+        {/* <Comments comments={blog.comments} /> */}
     </div>
 
 
