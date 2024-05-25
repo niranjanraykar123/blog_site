@@ -16,7 +16,7 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 router.get('/google/callback',
     passport.authenticate('google', { failureRedirect: '/' }),
     (req, res) => {
-        res.redirect('/dashboard');  // Redirect to your frontend dashboard or home page
+        res.redirect('/posts');  // Redirect to your frontend dashboard or home page
     }
 );
 // Logout user

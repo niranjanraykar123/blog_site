@@ -5,6 +5,9 @@ const session = require('express-session');
 const bodyParser = require('body-parser')
 const postRoutes = require('./routes/posts')
 const authRoutes = require('./routes/auth')
+const commentRoutes = require('./routes/comments')
+
+const path = require('path')
 // const commentRoutes = require('./routes/comments')
 const passport = require('passport')
 require('./auth/index')
@@ -16,11 +19,16 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false }
 }))
+app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.cookieParser());
 app.use(bodyParser.json())
-app.use('/auth', authRoutes);
-app.use('/posts', postRoutes);
 // app.use('/api/comments', commentRoutes);
 app.use(passport.initialize());
+app.use(passport.session());
+// app.use(app.router);
+app.use('/auth', authRoutes);
+app.use('/posts', postRoutes);
+app.use('/comments', commentRoutes);
 
 
 

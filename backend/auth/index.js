@@ -30,15 +30,10 @@ passport.use(new GoogleStrategy({
     }
 ));
 
-passport.serializeUser((user, done) => {
-    done(null, user.id);
+passport.serializeUser(function (user, done) {
+    done(null, user);
 });
 
-passport.deserializeUser(async (id, done) => {
-    try {
-        const user = await User.findById(id);
-        done(null, user);
-    } catch (err) {
-        done(err, null);
-    }
+passport.deserializeUser(function (user, done) {
+    done(null, user);
 });
