@@ -9,9 +9,12 @@ export const Publish = ({ user }) => {
     const [description, setDescription] = useState("");
     const navigate = useNavigate();
     useEffect(() => {
-        if (!user)
-            navigate('/')
-    }, [])
+        if (!user) {
+            // alert('please log in first')
+            // return;
+            navigate('/posts')
+        }
+    }, []);
 
     return <div>
         <div className="flex justify-center w-full pt-8">

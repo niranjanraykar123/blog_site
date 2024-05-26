@@ -84,7 +84,7 @@ export const FullBlogs = ({ blog, user }) => {
             </div>
             <div className='pl-10 p-4'>
                 <h3 className="text-2xl font-extrabold mt-10">Comments</h3>
-                <div className='flex justify-around'>
+                {user && <div className='flex justify-around'>
                     <div className='w-full'>
                         <input
                             type="text"
@@ -102,7 +102,7 @@ export const FullBlogs = ({ blog, user }) => {
                     >
                         Post
                     </button>
-                </div>
+                </div>}
                 <div className='m-4 w-screen bg-gray-500 h-1'></div>
                 <Comments
                     comments={comments}
