@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { EditPost } from "./EditPost";
 import { useState } from "react";
+import axios from "axios";
 // import EditPost from "../components/EditPost"
 
 export const BlogCard = ({
@@ -22,8 +23,14 @@ export const BlogCard = ({
     }
 
     const handleOnDelete = async () => {
-        // Logic for deleting the post goes here
-        console.log(`Deleting post with id: ${id}`);
+        console.log(id);
+        try {
+            const res = await axios.delete(`http://localhost:3000/posts/${id}`);
+            console.log(res);
+            location.reload();
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     console.log(userId, authorId);
