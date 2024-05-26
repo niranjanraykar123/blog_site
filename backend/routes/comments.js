@@ -51,9 +51,9 @@ router.put('/:id', ensureAuthenticated, async (req, res) => {
         }
 
         // if (comment.author.toString() !== req.user.id) 
-        if (comment.author.toString() !== "6651983e3a26ebb34fb6d4c4") {
-            return res.status(403).json({ message: 'Unauthorized' });
-        }
+        // if (comment.author.toString() !== "6651983e3a26ebb34fb6d4c4") {
+        //     return res.status(403).json({ message: 'Unauthorized' });
+        // }
 
         comment.content = content;
         const updatedComment = await comment.save();
@@ -67,16 +67,17 @@ router.put('/:id', ensureAuthenticated, async (req, res) => {
 router.delete('/:id', ensureAuthenticated, async (req, res) => {
     try {
         const comment = await Comment.findById(req.params.id);
+        // console.log(comment);
 
         if (!comment) {
             return res.status(404).json({ message: 'Comment not found' });
         }
 
-        if (comment.author.toString() !== req.user.id) {
-            return res.status(403).json({ message: 'Unauthorized' });
-        }
+        // if (comment.author.toString() !== req.user.id) {
+        //     return res.status(403).json({ message: 'Unauthorized' });
+        // }
 
-        await comment.remove();
+        await comment.deleteOne();
 
         // Also remove the comment from the post's comments array
         await Post.findByIdAndUpdate(comment.post, { $pull: { comments: comment.id } });
