@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/current_user', ensureAuthenticated, (req, res) => {
+    // console.log(req.user);
     if (req.user)
         res.json(req.user);
     else

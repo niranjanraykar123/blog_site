@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Comments from './Comments';
 
-export const FullBlogs = ({ blog }) => {
+export const FullBlogs = ({ blog, user }) => {
     const [comments, setComments] = useState([]);
     const [addComment, setAddComment] = useState();
 
@@ -24,6 +24,7 @@ export const FullBlogs = ({ blog }) => {
         try {
             const response = await axios.post(`http://localhost:3000/comments/${blog._id}`, {
                 content: addComment,
+                id: user._id
             });
             if (response.data)
                 getComments();

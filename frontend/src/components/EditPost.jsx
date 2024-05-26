@@ -4,31 +4,31 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ChangeEvent, useEffect, useState } from "react";
 
-export const Publish = ({ user }) => {
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
+export const EditPost = ({ user, title, content, id }) => {
+    const [title1, setTitle] = useState(title);
+    const [description, setDescription] = useState(content);
     const navigate = useNavigate();
     useEffect(() => {
         if (!user)
             navigate('/')
     }, [])
 
-    return <div>
+    return <div >
         <div className="flex justify-center w-full pt-8">
             <div className="max-w-screen-lg w-full">
                 <input onChange={(e) => {
                     setTitle(e.target.value)
-                }} type="text" className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Title" />
+                }} type="text" value={title1} className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Title" />
 
-                <TextEditor onChange={(e) => {
+                <TextEditor value={description} onChange={(e) => {
                     setDescription(e.target.value)
                 }} />
                 <button onClick={async () => {
                     console.log(user.googleId)
-                    const response = await axios.post('http://localhost:3000/posts', {
-                        title,
+                    const response = await axios.put(`http://localhost:3000/posts/${id}`, {
+                        title: title1,
                         content: description,
-                        id: user._id
+                        id: user
                     }
                     );
                     console.log(response.data)
@@ -42,13 +42,13 @@ export const Publish = ({ user }) => {
 }
 
 
-function TextEditor({ onChange }) {
+function TextEditor({ onChange, value }) {
     return <div className="mt-2">
         <div className="w-full mb-4 ">
             <div className="flex items-center justify-between border">
                 <div className="my-2 bg-white rounded-b-lg w-full">
                     <label className="sr-only">Publish post</label>
-                    <textarea onChange={onChange} id="editor" rows={8} className="focus:outline-none block w-full px-0 text-sm text-gray-800 bg-white border-0 pl-2" placeholder="Write an article..." required />
+                    <textarea value={value} onChange={onChange} id="editor" rows={8} className="focus:outline-none block w-full px-0 text-sm text-gray-800 bg-white border-0 pl-2" placeholder="Write an article..." required />
                 </div>
             </div>
         </div>

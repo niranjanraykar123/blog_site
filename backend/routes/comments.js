@@ -7,8 +7,9 @@ const router = express.Router();
 router.post('/:postId', ensureAuthenticated, async (req, res) => {
     try {
         const { content } = req.body;
-        // const author = req.user.id;
-        const author = "6651983e3a26ebb34fb6d4c4";
+        // console.log(req.user)
+        const author = req.body.id;
+        // const author = "6651983e3a26ebb34fb6d4c4";
         const postId = req.params.postId;
 
         const post = await Post.findById(postId);

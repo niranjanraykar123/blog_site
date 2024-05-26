@@ -8,8 +8,8 @@ const router = express.Router();
 router.post('/', ensureAuthenticated, async (req, res) => {
     try {
         const { title, content } = req.body;
-        // const author = req.user.id; // Assuming user ID is available in the request after authentication
-        const author = "6651983e3a26ebb34fb6d4c4"; // Assuming user ID is available in the request after authentication
+        const author = req.body.id; // Assuming user ID is available in the request after authentication
+        // const author = "6651983e3a26ebb34fb6d4c4"; // Assuming user ID is available in the request after authentication
         const newPost = new Post({ title, content, author });
         const post = await newPost.save();
         res.json(post);

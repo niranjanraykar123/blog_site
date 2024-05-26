@@ -29,7 +29,7 @@ function App() {
       <Navbar user={user} setUser={setUser} />
       <Routes>
         <Route path='/posts' element={<PostList user={user} setUser={setUser} />} />
-        <Route path='/post/:id' element={<Post />} />
+        <Route path='/post/:id' element={<Post user={user} />} />
         <Route path="/publish" element={<Publish user={user} />} />
       </Routes>
     </BrowserRouter >

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 import { FullBlogs } from "../components/FullBlog";
 import Comments from "../components/Comments";
 
-export const Post = () => {
+export const Post = ({ user }) => {
     const { id } = useParams();
     console.log(id)
     const [blog, setBlog] = useState([]);
@@ -20,7 +20,7 @@ export const Post = () => {
         getBlog();
     }, [])
     return <div>
-        <FullBlogs blog={blog} />
+        <FullBlogs user={user} blog={blog} />
         {/* <Comments comments={blog.comments} /> */}
     </div>
 

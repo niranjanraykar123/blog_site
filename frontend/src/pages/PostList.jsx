@@ -38,16 +38,15 @@ const PostList = ({ user, setUser }) => {
     }, []);
 
     return (
-        <div className="flex justify-center">
+        <div className="flex ml-40">
 
+            {/* {posts[0]} */}
             <div className="max-w-xl">
+                {posts.length > 0 && posts.map(blog => <BlogCard userId={user?._id} authorId={blog.author._id} id={blog._id} key={blog._id} authorName={blog.author.name}
+                    publishedDate={blog.createdAt.toString().substring(0, 10)}
 
-
-                {posts.length > 0 && posts.map(blog => <BlogCard id={blog._id} key={blog._id} authorName={blog.author.name}
-                    publishedDate={blog.createdAt}
                     title={blog.title}
                     content={blog.content} />
-
                 )}
             </div>
         </div>
