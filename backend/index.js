@@ -13,7 +13,7 @@ const path = require('path')
 const passport = require('passport')
 require('./auth/index')
 app.use(cors({
-    origin: ["http://localhost:3000", " https://accounts.google.com"],
+    origin: true,
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
 }));
